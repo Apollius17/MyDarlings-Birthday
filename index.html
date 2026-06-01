@@ -725,10 +725,9 @@
 </head>
 <body>
 
- <iframe id="yt-music" 
-  src="https://youtu.be/6mDwO2E945g?si=5vuI1T7EBte0rF5vD" 
-  style="display:none" allow="autoplay">
-</iframe>
+ <audio id="bg-music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <!-- ═══════════════════════════════════ HACKER SCREEN ═══════════════════════════════════ -->
 <div id="hack-screen">
@@ -1114,16 +1113,22 @@ function doTransition(){
     const bar=document.getElementById('loading-bar');
     setTimeout(()=>{ bar.style.width='100%'; },50);
 
-    setTimeout(()=>{
-      ts.style.display='none';
-      rs.style.display='block';
-      rs.style.opacity='0';
-      document.body.style.background=getComputedStyle(document.documentElement).getPropertyValue('--rom-bg')||'#1a0a05';
-      setTimeout(()=>{ rs.style.opacity='1'; },50);
-      buildGarden();
-      startPetals();
-      initScrollObserver();
-    },2500);
+   setTimeout(()=>{
+  ts.style.display='none';
+  rs.style.display='block';
+  rs.style.opacity='0';
+  document.body.style.background=getComputedStyle(document.documentElement).getPropertyValue('--rom-bg')||'#1a0a05';
+  setTimeout(()=>{ rs.style.opacity='1'; },50);
+  buildGarden();
+  startPetals();
+  initScrollObserver();
+
+  // ✅ Auto play starting at 1:10
+  const music = document.getElementById('bg-music');
+  music.currentTime = 70; // 1 minute 10 seconds
+  music.play();
+
+},2500);
   },800);
 }
 
